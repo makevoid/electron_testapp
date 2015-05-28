@@ -1,5 +1,8 @@
-ar app = require('app');  // Module to control application life.
+var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
+
+var bitcore = require('bitcore');
+
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -10,7 +13,7 @@ var mainWindow = null;
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
-  if (process.platform != 'darwin')
+  // if (process.platform != 'darwin')
     app.quit();
 });
 
@@ -25,6 +28,9 @@ app.on('ready', function() {
 
   // Open the devtools.
   mainWindow.openDevTools();
+
+  var privateKey = new bitcore.PrivateKey()
+  console.log(privateKey.toWIF())
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
